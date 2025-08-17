@@ -1,3 +1,5 @@
+import time
+
 Reset = '\033[0m'
 Red = '\033[31m'
 Cyan = '\033[34m'
@@ -6,7 +8,11 @@ sent = '0'
 
 print('''Conversions you can do:
       Hours - Minutes - Seconds
-      NOTATIONS [h - min - s]''')
+      NOTATIONS [h - min - s]
+      Kilmeters - Centimeters - Meters
+      NOTATIONS [km - m - cm]''')
+
+time.sleep(1)
 
 Num = input("Enter the value you would like to convert with its unit(Example: 12m or 12min): ").lower()
 
@@ -64,13 +70,12 @@ elif Unit == 'm':
     #Minutes shortened to in
     if unit_difference == 'min':
         print("On to converting minutes")
-        value = Num[0: -1]
+        value = Num[0: length - 3]
         for val in value:
             sent += val
-            #Error Here
         a_value = int(sent)
         print("Would you like to convert the time into (1.hours) or (2.seconds)")
-        user_Input = input(f"Enter {Cyan}1{Reset} for hours and {Cyan}2{Reset} for seconds")
+        user_Input = input(f"Enter {Cyan}1{Reset} for hours and {Cyan}2{Reset} for seconds: ")
         if user_Input == '1':
             h_val = a_value/60
             h_val = round(h_val, 3)
@@ -94,6 +99,20 @@ elif Unit == 'm':
         else:
             Cm_val = a_value / 100
             print(f"Your converted value is {Red}{Cm_val}m{Reset}")
+    
+    elif unit_difference == 'km':
+        value = Num[0: length - 2]
+        for val in value:
+            sent += val
+        a_value = int(sent)
+        print("Would you like to convert the distance into (Kilometers) or (Meters)")
+        user_Input = input(f"Enter {Cyan}1{Reset} for Meters and {Cyan}2{Reset} for Centimeters: ")
+        if user_Input == '1':
+            Km_val = a_value * 1000
+            print(f"Your converted value is {Red}{Km_val}m{Reset}")
+        else:
+            Cm_val = a_value * 100000
+            print(f"Your converted value is {Red}{Cm_val}cm{Reset}")
 
     else:
         value = Num[0: -1]
@@ -108,3 +127,5 @@ elif Unit == 'm':
         else:
             Cm_val = a_value * 100
             print(f"Your converted value is {Red}{Cm_val}cm{Reset}")
+elif Unit == 'g':
+    pass
